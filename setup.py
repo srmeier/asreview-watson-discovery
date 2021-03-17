@@ -27,7 +27,7 @@ setup(
             'nb_example = asreviewcontrib.models.nb_default_param:NaiveBayesDefaultParamsModel',
         ],
         'asreview.models.feature_extraction': [
-            # define feature_extraction algorithms
+            'nb_feat = asreviewcontrib.models.nb_default_param:NaiveBayesFeatureExtration'
         ],
         'asreview.models.balance': [
             # define balance strategy algorithms

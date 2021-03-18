@@ -13,13 +13,13 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         self._vectorizer = TfidfVectorizer()
     
     def fit(self, X, y):
-        print(X)
-        X = self._vectorizer.fit_transform(X)
-        print(X)
+        #print(X)
+        #X = self._vectorizer.fit_transform(X)
+        #print(X)
         return self._model.fit(X, y)
     
     def predict_proba(self, X):
-        X = self._vectorizer.transform(X)
+        #X = self._vectorizer.transform(X)
         return self._model.predict_proba(X)
 
 from asreview.models.feature_extraction.base import BaseFeatureExtraction

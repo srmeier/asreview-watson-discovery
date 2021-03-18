@@ -13,14 +13,11 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         self._vectorizer = TfidfVectorizer()
     
     def fit(self, X, y):
-        print(X)
-        X = self._vectorizer.fit_transform(X)
-        print(X)
-        print(y)
         for text in X:
-            print(X)
+            print(text)
         for class_label in y:
-            print(y)
+            print(class_label)
+        X = self._vectorizer.fit_transform(X)
         return self._model.fit(X, y)
     
     def predict_proba(self, X):

@@ -13,7 +13,7 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
     
     def fit(self, X, y):
         print(X)
-        return self._model.fit(X, y)
+        return self._model.fit(TfidfVectorizer().fit_transform(X), y)
     
     def predict_proba(self, X):
         return self._model.predict_proba(X)

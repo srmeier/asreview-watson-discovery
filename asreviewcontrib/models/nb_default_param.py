@@ -20,7 +20,7 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
     
     def predict_proba(self, X):
         X = self._vectorizer.transform(X)
-        return self._model.predict_proba()
+        return self._model.predict_proba(X)
 
 from asreview.models.feature_extraction.base import BaseFeatureExtraction
 

@@ -17,6 +17,10 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         X = self._vectorizer.fit_transform(X)
         print(X)
         print(y)
+        for text in X:
+            print(X)
+        for class_label in y:
+            print(y)
         return self._model.fit(X, y)
     
     def predict_proba(self, X):

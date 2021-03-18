@@ -70,7 +70,7 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         
         y = []
         for text in X:
-            y.append(doc_map[text])
+            y.append(doc_map[text.replace('\n', '')[0:1024]])
         
         return np.array(y)
         

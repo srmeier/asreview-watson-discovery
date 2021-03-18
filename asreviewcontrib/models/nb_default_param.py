@@ -10,13 +10,17 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
 
         super(NaiveBayesDefaultParamsModel, self).__init__()
         self._model = MultinomialNB()
+        self._vectorizer = TfidfVectorizer()
     
     def fit(self, X, y):
         print(X)
-        return self._model.fit(TfidfVectorizer().fit_transform(X), y)
+        X = self._vectorizer.fit_transform(X)
+        print(X)
+        return self._model.fit(X, y)
     
     def predict_proba(self, X):
-        return self._model.predict_proba(TfidfVectorizer().fit_transform(X))
+        X = self._vectorizer.transform(X)
+        return self._model.predict_proba()
 
 from asreview.models.feature_extraction.base import BaseFeatureExtraction
 

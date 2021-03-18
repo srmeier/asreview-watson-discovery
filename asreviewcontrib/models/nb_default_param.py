@@ -53,10 +53,14 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         natural_language_classifier = NaturalLanguageClassifierV1(authenticator=authenticator)
         natural_language_classifier.set_service_url(f'{self._url}')
 
-        y = []
+        text_collection = []
         for text in X:
-            classes = natural_language_classifier.classify(self._classifier_id, text.replace('\n', '')[0:1024]).get_result()
-            for class_label in classes['classes']:
+            text_collection.append({'text': text.replace('\n', '')[0:1024]})
+
+        y = []
+        classes = natural_language_classifier.classify_collection(self._classifier_id, text_collection).get_result()
+        for record in classes['collection']:
+            for class_label in record['classes']
                 if int(class_label['class_name']) == 1:
                     y.append(class_label['confidence'])
         

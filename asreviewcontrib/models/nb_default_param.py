@@ -1,4 +1,5 @@
 from sklearn.naive_bayes import MultinomialNB
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 from asreview.models.classifiers.base import BaseTrainClassifier
 
@@ -9,15 +10,15 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
 
         super(NaiveBayesDefaultParamsModel, self).__init__()
         self._model = MultinomialNB()
+        self._vectorizer = TfidfVectorizer()
     
     def fit(self, X, y):
         print(X)
-        from sklearn.feature_extraction.text import TfidfVectorizer
-        vectorizer = TfidfVectorizer()
-        X = vectorizer.fit_transform(X)
+        X = self._vectorizer.fit_transform(X)
         return self._model.fit(X, y)
     
     def predict_proba(self, X):
+        X = self._vectorizer.transform(X)
         return self._model.predict_proba(X)
 
 from asreview.models.feature_extraction.base import BaseFeatureExtraction

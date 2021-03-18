@@ -55,9 +55,8 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
 
         y = []
         for text in X:
-            classes = natural_language_classifier.classify(self._classifier_id, text).get_result()
+            classes = natural_language_classifier.classify(self._classifier_id, text.replace('\n', '')[0:1024]).get_result()
             for class_label in classes['classes']:
-                print(class_label['class_name'])
                 if int(class_label['class_name']) == 1:
                     y.append(class_label['confidence'])
         

@@ -30,7 +30,6 @@ class NaiveBayesFeatureExtration(BaseFeatureExtraction):
 
         super(NaiveBayesFeatureExtration, self).__init__()
 
-    @abstractmethod
     def transform(self, texts):
         return texts
     

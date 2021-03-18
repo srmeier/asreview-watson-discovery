@@ -23,7 +23,7 @@ from asreview.models.feature_extraction.base import BaseFeatureExtraction
 class NaiveBayesFeatureExtration(BaseFeatureExtraction):
     name = "nb_feat"
 
-    def __init__(self):
+    def __init__(self, split_ta=0, use_keywords=0):
 
         super(NaiveBayesFeatureExtration, self).__init__()
         self._vectorizer = TfidfVectorizer()

@@ -63,8 +63,12 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
             classes = natural_language_classifier.classify_collection(self._classifier_id, chunk_text).get_result()
             for record in classes['collection']:
                 for class_label in record['classes']:
+                    confidence = [0., 0.]
                     if int(class_label['class_name']) == 1:
-                        y.append(class_label['confidence'])
+                        confidence[1] = class_label['confidence']
+                    elif int(class_label['class_name']) == 0:
+                        confidence[0] = class_label['confidence']
+                    y.append(confidence)
         
         return y
         

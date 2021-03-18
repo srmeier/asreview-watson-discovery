@@ -25,7 +25,7 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
     def fit(self, X, y):
         watson_data = []
         for i, text in enumerate(X):
-            watson_data.append({'text': text, 'class': y[i]})
+            watson_data.append({'text': text.replace('\n', '')[0:1024], 'class': y[i]})
         pd.DataFrame(watson_data).to_csv('watson_data.csv', index=False, header=False)
         
         authenticator = IAMAuthenticator(f'{self._apikey}')

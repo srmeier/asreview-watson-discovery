@@ -58,18 +58,19 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         for text in X:
             text_collection.append({'text': text.replace('\n', '')[0:1024]})
 
-        y = []
+        doc_map = {}
         chunk_size = 30
         for chunk_text in [text_collection[i:i + chunk_size] for i in range(0, len(text_collection), chunk_size)]:
             classes = natural_language_classifier.classify_collection(self._classifier_id, chunk_text).get_result()
             for record in classes['collection']:
+                confidence = [0., 0.]
                 for class_label in record['classes']:
-                    confidence = [0., 0.]
-                    if int(class_label['class_name']) == 1:
-                        confidence[1] = class_label['confidence']
-                    elif int(class_label['class_name']) == 0:
-                        confidence[0] = class_label['confidence']
-                    y.append(confidence)
+                    confidence[int(class_label['class_name'])] = class_label['confidence']
+                doc_map[record['text']] = confidence
+        
+        y = []
+        for text in X:
+            y.append(doc_map[text])
         
         return np.array(y)
         

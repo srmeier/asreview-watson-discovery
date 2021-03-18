@@ -1,5 +1,7 @@
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
+from os import environ
 
 from asreview.models.classifiers.base import BaseTrainClassifier
 
@@ -13,10 +15,15 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         self._vectorizer = TfidfVectorizer()
     
     def fit(self, X, y):
-        for text in X:
-            print(text)
-        for class_label in y:
-            print(class_label)
+        watson_data = []
+        for i, text in enumerate(X):
+            watson_data.append({'text': text, 'class': y[i]})
+        pd.DataFrame(watson_data).to_csv('watson_data.csv', index=False, header=False)
+        
+        #for text in X:
+        #    print(text)
+        #for class_label in y:
+        #    print(class_label)
         X = self._vectorizer.fit_transform(X)
         return self._model.fit(X, y)
     

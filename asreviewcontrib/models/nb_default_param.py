@@ -2,6 +2,7 @@ from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pandas as pd
 from os import environ
+import numpy as np
 
 from asreview.models.classifiers.base import BaseTrainClassifier
 
@@ -70,7 +71,7 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
                         confidence[0] = class_label['confidence']
                     y.append(confidence)
         
-        return y
+        return np.array(y)
         
         #X = self._vectorizer.transform(X)
         #return self._model.predict_proba(X)

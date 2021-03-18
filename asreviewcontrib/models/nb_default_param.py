@@ -35,6 +35,7 @@ class NaiveBayesFeatureExtration(BaseFeatureExtraction):
     def fit(self, texts):
         #print(texts)
         #self._vectorizer.fit(texts)
+        pass
         
     def transform(self, texts):
         return texts #self._vectorizer.transform(texts)

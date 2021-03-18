@@ -16,7 +16,7 @@ class NaiveBayesDefaultParamsModel(BaseTrainClassifier):
         return self._model.fit(TfidfVectorizer().fit_transform(X), y)
     
     def predict_proba(self, X):
-        return self._model.predict_proba(X)
+        return self._model.predict_proba(TfidfVectorizer().fit_transform(X))
 
 from asreview.models.feature_extraction.base import BaseFeatureExtraction
 
